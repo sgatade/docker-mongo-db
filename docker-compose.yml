@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+
+    my-mongo-dev:
+        container_name: my-mongo-dev
+        image: mongo:latest
+        command: mongod --port 27072
+        ports:
+            - 4004:27072
+        volumes:
+            - /my-mongo-dev-deb-data:/data/db
