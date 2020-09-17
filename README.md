@@ -11,19 +11,24 @@
 Install Docker, Docker-compose & pull the Mongo image from Docker hub
 
 ## docker-compose.yml
+This is a very simple version of *docker-compose.yml*. 
 
-version: '3'
+**command:** - Use this to start MongoDB with custom port (other than default 27017).
+**ports:** - In this example, I'm exposing *4004* port on my *CentOS host*, which will be mapped to port *27072* on my Mongo *Docker instance*. Once done, we will be able to access the MongoDB instance on CentOS using port *4004*. [Note: You need to open this port on your CentOS firewall before trying to connect to the DB from internet.]
+**volumes:** - *my-mongo-dev-db-data* is a local directory on my *CentOS host*
 
-services:
+    version: '3'
 
-    my-mongo-dev:
-        container_name: my-mongo-dev
-        image: mongo:latest
-        command: mongod --port 27072
-        ports:
-            - 4004:27072
-        volumes:
-            - /my-mongo-dev-deb-data:/data/db
+    services:
+
+        my-mongo-dev:
+            container_name: my-mongo-dev
+            image: mongo:latest
+            command: mongod --port 27072
+            ports:
+                - 4004:27072
+            volumes:
+                - /my-mongo-dev-deb-data:/data/db
 
 ## Manual Steps 1
 
