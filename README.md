@@ -30,7 +30,6 @@ This is a very simple version of *docker-compose.yml*.
             volumes:
                 - /my-mongo-dev-deb-data:/data/db
 
-<<<<<<< HEAD
 ## Next steps
 
 Start docker containers...
