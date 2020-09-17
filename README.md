@@ -13,9 +13,9 @@ Install Docker, Docker-compose & pull the Mongo image from Docker hub
 ## 3. docker-compose.yml
 This is a very simple version of *docker-compose.yml*. 
 
-**command:** - Use this to start MongoDB with custom port (other than default 27017).    
-**ports:** - In this example, I'm exposing *4004* port on my *CentOS host*, which will be mapped to port *27072* on my Mongo *Docker instance*. Once done, we will be able to access the MongoDB instance on CentOS using port *4004*. [Note: You need to open this port on your CentOS firewall before trying to connect to the DB from internet.]    
-**volumes:** - *my-mongo-dev-db-data* is a local directory on my *CentOS host*   
+3.1. **command:** - Use this to start MongoDB with custom port (other than default 27017).    
+3.2. **ports:** - In this example, I'm exposing *4004* port on my *CentOS host*, which will be mapped to port *27072* on my Mongo *Docker instance*. Once done, we will be able to access the MongoDB instance on CentOS using port *4004*. [Note: You need to open this port on your CentOS firewall before trying to connect to the DB from internet.]    
+3.3. **volumes:** - *my-mongo-dev-db-data* is a local directory on my *CentOS host*   
 
     version: '3'
 
@@ -32,33 +32,33 @@ This is a very simple version of *docker-compose.yml*.
 
 ## 4. Next steps
 
-a. Start docker containers...
+4.1. Start docker containers...
 
     docker-compose up
 
-b. Get the Mongo docker container id...
+4.2. Get the Mongo docker container id...
 
     docker ps
 
-c. Execute *bash* on the docker container...
+4.3. Execute *bash* on the docker container...
 
     docker exec -t <container_id> bash
 
 #### 5. Get your mongo db ready
 
-a. Connect to the mongo instance...
+5.1. Connect to the mongo instance...
 
     mongo localhost:27072
 
-b. Switch to your database...
+5.2. Switch to your database...
 
     use my-dev-db;
 
-c. Create a collection...
+5.3. Create a collection...
 
     db.createCollection('my-test-table');
 
-d. Create the user...
+5.4. Create the user...
 
     db.createUser(
         {
@@ -77,21 +77,21 @@ Note:
 
 ## 6. Restart the container
 
-a. Exit the mongo docker container
+6.1. Exit the mongo docker container
 
     exit
 
-b. Shutdown the containers
+6.2. Shutdown the containers
 
     docker-compose down
 
-c. Edit the *docker-compose.yml*, add *--auth* to the the *command:* section to start mongo with autorisation. The *command:* should look like this now...
+6.3. Edit the *docker-compose.yml*, add *--auth* to the the *command:* section to start mongo with autorisation. The *command:* should look like this now...
 
     command: mongod --port 27072 --auth
 
-d. Save and exit the editor (*wq! if using vi*)
+6.4. Save and exit the editor (*wq! if using vi*)
 
-e. Start the containers again...
+6.5. Start the containers again...
 
     docker-compose up
 
