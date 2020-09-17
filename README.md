@@ -30,26 +30,69 @@ This is a very simple version of *docker-compose.yml*.
             volumes:
                 - /my-mongo-dev-deb-data:/data/db
 
-## Manual Steps 1
+## Next steps
 
-## Get into docker container
-docker ps -> Copy container id
-docker exec -t <container_id> bash
+Start docker containers...
 
-#### Create a collection
-mongo localhost:27007
-db.createCollection('testCollection');
+    docker-compose up
 
-#### Create user manually
-db.createUser(
-  {
-    user: "my-user-name",
-    pwd: passwordPrompt(),  // or cleartext password
-    roles: [
-       { role: "readWrite", db: "my-db" }
-    ]
-  }
-)
+Get the Mongo docker container id...
 
-## Manual Steps 2
-Restart docker-compose with mongo --auth
+    docker ps
+
+Execute *bash* on the docker container...
+
+    docker exec -t <container_id> bash
+
+#### Get your mongo db ready
+
+Connect to the mongo instance...
+
+    mongo localhost:27072
+
+Switch to your database...
+
+    use my-dev-db;
+
+Create a collection...
+
+    db.createCollection('my-test-table');
+
+Create the user...
+
+    db.createUser(
+        {
+            user: "my-user-name",
+            pwd: passwordPrompt(),  
+            roles: [
+                { role: "readWrite", db: "my-db" }
+            ]
+        }
+    )
+
+Note: 
+
+1. You can create and assign multiple *role*s to multiple *db*s
+2. You can choose to use a plaintext password instead of a password prompt (but its less secure!)
+
+## Restart the container
+
+Exit the mongo docker container
+
+    exit
+
+Shutdown the containers
+
+    docker-compose down
+
+Edit the *docker-compose.yml*, add *--auth* to the the *command:* section to start mongo with autorisation. The *command:* should look like this now...
+
+    command: mongod --port 27072 --auth
+
+Save and exit the editor (*wq! if using vi*)
+
+Start the containers again...
+
+    docker-compose up
+
+You can now access the mongo db container using the username and password created above.
