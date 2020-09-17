@@ -15,7 +15,7 @@ This is a very simple version of *docker-compose.yml*.
 
 3.1. **command:** - Use this to start MongoDB with custom port (other than default 27017).    
 3.2. **ports:** - In this example, I'm exposing *4004* port on my *CentOS host*, which will be mapped to port *27072* on my Mongo *Docker instance*. Once done, we will be able to access the MongoDB instance on CentOS using port *4004*. [Note: You need to open this port on your CentOS firewall before trying to connect to the DB from internet.]    
-3.3. **volumes:** - *my-mongo-dev-db-data* is a local directory on my *CentOS host*   
+3.3. **volumes:** - *my-mongo-dev-db-data* is a local directory on my *CentOS host* which will be linked to */data/db* on the Mongo docker instance.   
 
     version: '3'
 
