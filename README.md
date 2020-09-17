@@ -1,16 +1,16 @@
 # Docker Compose with MongoDB
 
-## Environment
+## 1. Environment
 
-1. CentOS (AWS Lightsail)
-2. Docker : version 18.09.7, build 2d0083d
-3. docker-compose : version 1.23.1, build b02f1306
-4. Image : [MongoDB:Latest](https://hub.docker.com/_/mongo)
+a. CentOS (AWS Lightsail)
+b. Docker : version 18.09.7, build 2d0083d
+c. docker-compose : version 1.23.1, build b02f1306
+d. Image : [MongoDB:Latest](https://hub.docker.com/_/mongo)
 
-## Pre-requisites
+## 2. Pre-requisites
 Install Docker, Docker-compose & pull the Mongo image from Docker hub
 
-## docker-compose.yml
+## 3. docker-compose.yml
 This is a very simple version of *docker-compose.yml*. 
 
 **command:** - Use this to start MongoDB with custom port (other than default 27017).    
@@ -30,42 +30,42 @@ This is a very simple version of *docker-compose.yml*.
             volumes:
                 - /my-mongo-dev-deb-data:/data/db
 
-## Next steps
+## 4. Next steps
 
-Start docker containers...
+a. Start docker containers...
 
     docker-compose up
 
-Get the Mongo docker container id...
+b. Get the Mongo docker container id...
 
     docker ps
 
-Execute *bash* on the docker container...
+c. Execute *bash* on the docker container...
 
     docker exec -t <container_id> bash
 
-#### Get your mongo db ready
+#### 5. Get your mongo db ready
 
-Connect to the mongo instance...
+a. Connect to the mongo instance...
 
     mongo localhost:27072
 
-Switch to your database...
+b. Switch to your database...
 
     use my-dev-db;
 
-Create a collection...
+c. Create a collection...
 
     db.createCollection('my-test-table');
 
-Create the user...
+d. Create the user...
 
     db.createUser(
         {
             user: "my-user-name",
             pwd: passwordPrompt(),  
             roles: [
-                { role: "readWrite", db: "my-db" }
+                { role: "readWrite", db: "my-dev-db" }
             ]
         }
     )
@@ -75,24 +75,24 @@ Note:
 1. You can create and assign multiple *role*s to multiple *db*s
 2. You can choose to use a plaintext password instead of a password prompt (but its less secure!)
 
-## Restart the container
+## 6. Restart the container
 
-Exit the mongo docker container
+a. Exit the mongo docker container
 
     exit
 
-Shutdown the containers
+b. Shutdown the containers
 
     docker-compose down
 
-Edit the *docker-compose.yml*, add *--auth* to the the *command:* section to start mongo with autorisation. The *command:* should look like this now...
+c. Edit the *docker-compose.yml*, add *--auth* to the the *command:* section to start mongo with autorisation. The *command:* should look like this now...
 
     command: mongod --port 27072 --auth
 
-Save and exit the editor (*wq! if using vi*)
+d. Save and exit the editor (*wq! if using vi*)
 
-Start the containers again...
+e. Start the containers again...
 
     docker-compose up
 
-You can now access the mongo db container using the username and password created above.
+**You can now access the mongo db container using the username and password created above.**
